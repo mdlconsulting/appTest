@@ -1,6 +1,7 @@
 //express server and API
 import express from 'express'; 
-import { makePrediction } from './prediction';
+import path from 'path'; 
+import { makePrediction } from './src/prediction.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
