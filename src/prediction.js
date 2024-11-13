@@ -1,15 +1,15 @@
-import { loadLayersModel, tensor2d } from '@tensorflow/tfjs-node';
+import * as tf from '@tensorflow/tfjs-node';
+import path from 'path';
 
 async function loadModel() {
-  return await loadLayersModel('file://models/trained_model/model.json');
+  return await tf.loadLayersModel('file://models/trained_model/model.json');
 }
 
 async function makePrediction({ latitude, longitude, date }) {
   const model = await loadModel();
-
-  const dateObj = new Date(date);
-
-  return { prediction: (model.predict(tensor2d([[parseFloat(latitude), parseFloat(longitude), dateObj.getTime()]]))).arraySync() };
+  const inputTensor = tf.tensor2d([[parseFloat(latitude), parseFloat(longitude), new Date(date).getTime()]]);
+  const prediction = model.predict(inputTensor);
+  return { prediction: prediction.arraySync() };
 }
 
-export default { makePrediction };
+export { makePrediction };

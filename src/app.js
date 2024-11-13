@@ -1,16 +1,20 @@
 //express server and API
-import express from 'express'; 
-import path from 'path'; 
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { makePrediction } from './src/prediction.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '../public'))); 
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html')); 
 });
 
 app.post('/predict', async (req, res) => {
@@ -26,3 +30,4 @@ app.post('/predict', async (req, res) => {
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
+
