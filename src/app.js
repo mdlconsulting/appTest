@@ -1,8 +1,6 @@
 //express server and API
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const { makePrediction } = require('./prediction').default;
+import express from 'express'; 
+import { makePrediction } from './prediction';
 
 const app = express();
 const port = process.env.PORT || 3000;
