@@ -1,4 +1,6 @@
 //model training for predictions
+import * as tf from '@tensorflow/tfjs-node';
+
 import { tensor2d, sequential, layers, train, losses, node } from '@tensorflow/tfjs-node';
 import { getData, fetchProcessData } from './fetchProcess.js';
 
