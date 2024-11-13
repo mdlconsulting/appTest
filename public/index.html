@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildfire Prediction Model</title>
+    <title>Wildfire Prediction</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -15,10 +15,31 @@
         <label for="longitude">Longitude:</label>
         <input type="text" id="longitude" name="longitude" required><br>
 
-        <label for="date">Date (DD-MM-YYYY):</label>
+        <label for="date">Date (YYYY-MM-DD):</label>
         <input type="date" id="date" name="date" required><br>
 
-        <button type="submit">Predict Fire</button>
+        <button type="submit">Predict</button>
     </form>
+    <div id="result"></div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = {
+                latitude: formData.get('latitude'),
+                longitude: formData.get('longitude'),
+                date: formData.get('date')
+            };
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result);
+        });
+    </script>
 </body>
 </html>
