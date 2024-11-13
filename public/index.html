@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div><h1 class = "form-header">Wildfire Prediction Model</h1></div>
+    <div class = "form-header"><h1>Wildfire Prediction Model</h1></div>
+    <div class ="client-form">
     <form action="/predict" method="POST">
         <label for="latitude">Latitude:</label>
         <input type="text" id="latitude" name="latitude" required><br>
@@ -20,6 +21,7 @@
 
         <button type="submit">Predict Fire</button>
     </form>
+</div>
     <div id="result"></div>
 
     <script>
