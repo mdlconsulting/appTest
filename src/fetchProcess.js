@@ -1,7 +1,7 @@
 //fetching and processing of the data
-import db from './database';
+import db from './db.js';
 
-async function getData() {
+export async function getData() {
     const cursor = await db.query(` 
         FOR doc IN historical_data 
         FILTER doc.acq_date >= "01 01 2020" AND doc.acq_date <= "31 12 2023" 
@@ -10,7 +10,7 @@ async function getData() {
     return data;
 }
 
-function fetchProcessData(data){
+export function fetchProcessData(data){
     return data.map(row =>({
       latitude: parseFloat(row.latitude),
       longitude: parseFloat(row.longitude),

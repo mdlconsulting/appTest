@@ -1,6 +1,6 @@
 //model training for predictions
 import { tensor2d, sequential, layers, train, losses, node } from '@tensorflow/tfjs-node';
-import { getData, fetchProcessData } from './preprocess';
+import { getData, fetchProcessData } from './fetchProcess.js';
 
 async function trainModel() {
     const processedData = fetchProcessData((await getData()));
